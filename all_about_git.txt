@@ -1,0 +1,206 @@
+Installation
+= sudo apt-get install git
+
+Version Number
+= git --version
+= which git
+
+Configuration
+= git config –-system
+= git config –-global (user – global to the user)
+= git config
+
+Example
+= git config --global user.name "Bhavesh Bhatt"
+= git config --global user.email "bhattbhavesh91@gmail.com"
+= git config --global core.editor "vi"
+= git config --global color.ui true
+
+To View 
+= git config --list
+Go To Home Directory
+= cd ~ and ls -la
+we can see a file .gitconfig
+= cat .gitconfig
+
+To Install Auto-completion of GIT
+= cd ~
+= curl -OL https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
+= mv ~/git-completion.bash ~/.git-completion.bash
+= vi .bashrc 
+= if [ -f ~/.git-completion.bash ]; then
+	source ~/.git-completion.bash
+  fi
+
+Help 
+= git help 
+
+Initialize a repo
+Go to the directory and type 
+= git init
+
+
+= git add .
+= git commit -m "Message"
+= git log 
+
+3 Tree Architecture
+= repository
+= staging index
+= working
+
+git add    = working -> staging 
+git commit = staging -> repository
+
+
+Adding files 
+= git status
+report back difference between working directory, staging index and repository.
+
+= git add second_file.txt third_file.txt 
+
+= git reset HEAD second_file.txt
+Removes the given file from staging index back to working directory.
+
+= git log
+Information about the commits
+
+How to view difference in files
+= git diff
+
+Difference is 
+Staging index - Working directory
+
+--- a/first_file.txt
++++ b/first_file.txt
+@@ -1,2 +1,3 @@
+ This is my first file
+ Line No 2
++My name is BHavesh
+
+--- file name is the repository
++++ file name is the one in working directory
+
+
+@@ -1,4 +1,2 @@
+that is to say to which lines the diff is referred 
+for file -, line 1 to 4;
+for file  +, line 1 to 2
+
+= git diff --staged
+difference between repository - staging index
+
+= git diff HEAD
+difference between repository - working directory
+
+= git rm file_name
+removes the file from staging and working directory.
+then do a git commit to remove it from the repo
+
+= git rm --cached file1.txt
+removes from repository and not the working directory.
+
+= git mv fi1ename1 filename2
+renames file1 to file2 and then you can commit it 
+
+= git commit -am "Changed number" 
+commit all the changes from working directory to repo and also update the staging area.
+
+Undo changes
+- copy all changes from current branch of repo to the working directory
+= git checkout -- index.html
+
+Unstaging a file (reset the change from repo to staging area)
+= git reset HEAD f1.txt
+
+= git commit --amend -m "Hello"
+This is used to amend a change from staging to the last committed repo!
+For example if I make a small change in one of the file and I don't want to create 
+a new repo for it then I use the above command to ammend it to the commit pointed by HEAD.
+
+
+= git checkout SHA_value(10 so digits) -- index.html
+Copy the changes from the particular commit to the staging area.
+
+git revert command used to revert back all the changes that we made 
+= git revert SHA_value
+
+Undo multiple commits 
+git reset 
+-- soft -> moves head pointer but doesnot change staging index or working directory.
+-- mixed -> moves head pointer and changes staging index but doesnot change working directory.
+-- hard -> moves head pointer but also makes both staging and working directory the same
+
+To remove untracked file or unwanted file
+= git clean -f
+
+To ignore some files while committing or putting in staging directory
+= touch .gitignore
+https://github.com/github/gitignore/blob/master/Python.gitignore
+
+git config --global core.excludefile ~/.gitignore_global
+gitignore_global is the file which includes all the files to exclude
+
+Ignoring a file included in repository
+add file.txt in staging and commit it.
+Open .gitignore add the file name = file.txt
+git rm --cached file.txt - will remove file from staging index but will leave the file as it is in repo and working directory.
+now when we do git status it won't show anything.
+
+To track empty directory
+= Create an empty file inside the folder with the following name ".gitkeep"
+= Now check git status and we can see that the directory is included.
+
+
+Navigating the commit tree files
+= git ls-tree HEAD
+= git ls-tree HEAD~ (Parent Commit)
+= git ls-tree HEAD~2 (Grandparent Commit)
+
+git log --oneline (Summary of all commits)
+
+To view the changes in commit 
+= git show SHA_value
+
+To comparing commits
+= git diff SHA_value1..SHA_value2
+= git diff SHA_value1 (Compares commit with SHA_value1 with working directory)
+
+
+Branches
+= git branch (shows all the branches)
+= git branch new_feature (create a new branch)
+= git checkout new_feature (To switch to new branch)
+= git checkout -b new_feature(Create and check out the new branch)
+= git diff master..new_feature (Compare between two branches)
+= git branch -m new_feature seo_title (Renaming Branches)
+= git branch -d branch_to_delete (Deleting the Branch) - you cannot delete if you are on that branch
+
+Merging code
+= git merge branch_to_be_merged
+= git merge --abort (To abort merge)
+
+Stash
+= git stash save "Hello"
+= git stash list
+= git stash show -p stash@{0}
+= git stash pop stash_number
+= git stash apply stash_number
+= git stash clear
+= git stash drop stash_number
+
+GitHub
+= To push to git hub the command is push and pull it its fetch and then merge.
+= git remote add origin https://github.com/bhattbhavesh91/exploring_c_programming.git
+= git remote -v (To see which site we are fectching or pushing the git)
+= git remote rm origin
+= git push -u origin master
+= git pull origin master
+
+= git clone www.......git (address should end with .git)
+
+pushing an existing repository from the command line
+
+git remote add origin www. ..... .git
+git push -u origin master
+
