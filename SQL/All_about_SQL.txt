@@ -1,25 +1,293 @@
-# To install MySQL Server
-
+==================
+To install MySQL Server
 - sudo apt-get install mysql-server
-
 - Default user is root
 - Enter a simple password for root user
-
 - enter mysql command to check if its installed 
 - mysql -u root -p
-
 - show databases; - to check databases present
-
 - quit - to quit sql server
-
-# To install MySQL workbench
+==================
+To install MySQL workbench
 - sudo apt-get install mysql-workbench
-
 Go to search
 - MySQL
-
 - Open MySQL workbench
 - Click Database - Query database
 - Click Ok
 - Enter the root password
+==================
+==================
+Showing the databases
+
+show databases;
+==================
+Creating a database
+
+create database users;
+==================
+Go inside that database 
+
+use users;
+==================
+To view all the tables
+
+show tables;
+==================
+Creating a Table
+
+create table users1(id int(20),campaign char(20),signed_up_on Date);
+==================
+View Table information
+
+describe user1;
+==================
+Adding data to the databases
+insert into users1
+values(1,'facebook','2014-10-01');
+
+Inserting multiple rows 
+insert into users1
+values(2,'twitter','2014-10-02'),
+(3,'direct','2014-10-02'),
+(4,'facebook','2014-10-03'),
+(5,'organic','2014-10-03'),
+(6,'organic','2014-10-03'),
+(7,'organic','2014-10-04'),
+(8,'direct','2014-10-05'),
+(9,'twitter','2014-10-05'),
+(10,'organic','2014-10-05');
+
+==================
+To View the table
+mysql> select * from users1;
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    1 | facebook | 2014-10-01   |
+|    2 | twitter  | 2014-10-02   |
+|    3 | direct   | 2014-10-02   |
+|    4 | facebook | 2014-10-03   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|    8 | direct   | 2014-10-05   |
+|    9 | twitter  | 2014-10-05   |
+|   10 | organic  | 2014-10-05   |
++------+----------+--------------+
+
+==================
+Sorting with ORDER BY
+mysql> select * from users1 order by campaign;
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    3 | direct   | 2014-10-02   |
+|    8 | direct   | 2014-10-05   |
+|    1 | facebook | 2014-10-01   |
+|    4 | facebook | 2014-10-03   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|   10 | organic  | 2014-10-05   |
+|    2 | twitter  | 2014-10-02   |
+|    9 | twitter  | 2014-10-05   |
++------+----------+--------------+
+
+Here is how you can sort by campaign AND signed_up_on
+mysql> select * from users1 order by campaign,signed_up_on;
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    3 | direct   | 2014-10-02   |
+|    8 | direct   | 2014-10-05   |
+|    1 | facebook | 2014-10-01   |
+|    4 | facebook | 2014-10-03   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|   10 | organic  | 2014-10-05   |
+|    2 | twitter  | 2014-10-02   |
+|    9 | twitter  | 2014-10-05   |
++------+----------+--------------+
+
+You can also sort in reverse order by adding “DESC”.
+mysql> select * from users1 order by campaign desc;
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    2 | twitter  | 2014-10-02   |
+|    9 | twitter  | 2014-10-05   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|   10 | organic  | 2014-10-05   |
+|    1 | facebook | 2014-10-01   |
+|    4 | facebook | 2014-10-03   |
+|    3 | direct   | 2014-10-02   |
+|    8 | direct   | 2014-10-05   |
++------+----------+--------------+
+
+==================
+Filtering with WHERE
+mysql> select * from users1 where campaign ='twitter';
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    2 | twitter  | 2014-10-02   |
+|    9 | twitter  | 2014-10-05   |
++------+----------+--------------+
+2 rows in set (0.00 sec)
+
+Multiple value selection - 
+mysql> select * from users1 where campaign in ('twitter','direct');
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    2 | twitter  | 2014-10-02   |
+|    3 | direct   | 2014-10-02   |
+|    8 | direct   | 2014-10-05   |
+|    9 | twitter  | 2014-10-05   |
++------+----------+--------------+
+
+What if you wanted to fetch all the users EXCEPT the ones that came Facebook or Twitter? This is supported with “NOT IN” like this:
+
+mysql> select * from users1 where campaign not in ('twitter','direct');
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    1 | facebook | 2014-10-01   |
+|    4 | facebook | 2014-10-03   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|   10 | organic  | 2014-10-05   |
++------+----------+--------------+
+
+Multiple column conditions for selecting a criteria
+mysql> select * from users1 where campaign in ('twitter','direct') and not signed_up_on='2014-10-05';
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    2 | twitter  | 2014-10-02   |
+|    3 | direct   | 2014-10-02   |
++------+----------+--------------+
+
+Now it’s time to show that SQL’s WHERE is more powerful than Excel’s filters.
+In addition to AND, You can actually use OR to say something like “Get me all the users that signed up before 2014-10-04 OR came in organically”.
+Here is the query:
+mysql> select * from users1 where campaign = 'organic' or signed_up_on < '2014-10-04';
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    1 | facebook | 2014-10-01   |
+|    2 | twitter  | 2014-10-02   |
+|    3 | direct   | 2014-10-02   |
+|    4 | facebook | 2014-10-03   |
+|    5 | organic  | 2014-10-03   |
+|    6 | organic  | 2014-10-03   |
+|    7 | organic  | 2014-10-04   |
+|   10 | organic  | 2014-10-05   |
++------+----------+--------------+
+
+==================
+Filtering and sorting 
+select * from users1 where campaign in ('twitter','direct') order by campaign;
++------+----------+--------------+
+| id   | campaign | signed_up_on |
++------+----------+--------------+
+|    3 | direct   | 2014-10-02   |
+|    8 | direct   | 2014-10-05   |
+|    2 | twitter  | 2014-10-02   |
+|    9 | twitter  | 2014-10-05   |
++------+----------+--------------+
+4 rows in set (0.00 sec)
+
+
+==================
+All about Joins
+
+create table t1(cid int(20), cname char(20));
+insert into t1
+values (1,'India'),
+(2, 'USA'),
+(3, 'Australia');
+
+Table 1 = 
++------+-----------+
+| cid  | cname     |
++------+-----------+
+|    1 | India     |
+|    2 | USA       |
+|    3 | Australia |
++------+-----------+
+
+create table t2(sid int(20), cid int(20), sname char(20));
+insert into t2
+values (1,1,'Maharashtra'),
+(2,1,'Punjab'),
+(3,2,'Massachusetts'),
+(4,NULL,'Kathmandu');
+
+Table 2 = 
++------+------+---------------+
+| sid  | cid  | sname         |
++------+------+---------------+
+|    1 |    1 | Maharashtra   |
+|    2 |    1 | Punjab        |
+|    3 |    2 | Massachusetts |
+|    4 | NULL | Kathmandu     |
++------+------+---------------+
+
+
+Inner join
+mysql> select * 
+    -> from t1
+    -> inner join t2
+    -> on
+    -> t1.cid = t2.cid;
++------+-------+------+------+---------------+
+| cid  | cname | sid  | cid  | sname         |
++------+-------+------+------+---------------+
+|    1 | India |    1 |    1 | Maharashtra   |
+|    1 | India |    2 |    1 | Punjab        |
+|    2 | USA   |    3 |    2 | Massachusetts |
++------+-------+------+------+---------------+
+
+
+Right join
+mysql> select * from t1 right join t2 on t1.cid = t2.cid;
++------+-------+------+------+---------------+
+| cid  | cname | sid  | cid  | sname         |
++------+-------+------+------+---------------+
+|    1 | India |    1 |    1 | Maharashtra   |
+|    1 | India |    2 |    1 | Punjab        |
+|    2 | USA   |    3 |    2 | Massachusetts |
+| NULL | NULL  |    4 | NULL | Kathmandu     |
++------+-------+------+------+---------------+
+
+
+Left join
+mysql> select * from t1 left join t2 on t1.cid = t2.cid;
++------+-----------+------+------+---------------+
+| cid  | cname     | sid  | cid  | sname         |
++------+-----------+------+------+---------------+
+|    1 | India     |    1 |    1 | Maharashtra   |
+|    1 | India     |    2 |    1 | Punjab        |
+|    2 | USA       |    3 |    2 | Massachusetts |
+|    3 | Australia | NULL | NULL | NULL          |
++------+-----------+------+------+---------------+
+
+
+Outer join
+mysql> select * from t1 left join t2 on t1.cid = t2.cid union select * from t1 right join t2 on t1.cid = t2.cid;
++------+-----------+------+------+---------------+
+| cid  | cname     | sid  | cid  | sname         |
++------+-----------+------+------+---------------+
+|    1 | India     |    1 |    1 | Maharashtra   |
+|    1 | India     |    2 |    1 | Punjab        |
+|    2 | USA       |    3 |    2 | Massachusetts |
+|    3 | Australia | NULL | NULL | NULL          |
+| NULL | NULL      |    4 | NULL | Kathmandu     |
++------+-----------+------+------+---------------+
 
