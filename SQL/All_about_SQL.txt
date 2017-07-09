@@ -1,0 +1,25 @@
+# To install MySQL Server
+
+- sudo apt-get install mysql-server
+
+- Default user is root
+- Enter a simple password for root user
+
+- enter mysql command to check if its installed 
+- mysql -u root -p
+
+- show databases; - to check databases present
+
+- quit - to quit sql server
+
+# To install MySQL workbench
+- sudo apt-get install mysql-workbench
+
+Go to search
+- MySQL
+
+- Open MySQL workbench
+- Click Database - Query database
+- Click Ok
+- Enter the root password
+
