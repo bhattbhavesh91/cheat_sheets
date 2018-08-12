@@ -204,3 +204,9 @@ pushing an existing repository from the command line
 git remote add origin www. ..... .git
 git push -u origin master
 
+Adding SSH Key to a machine
+- ssh-keygen -t rsa -b 4096
+- Enter a password if you want (I did)
+- cd /home/bhavesh/.ssh/
+- copy the contents of id_rsa.pub into the github account.
+
