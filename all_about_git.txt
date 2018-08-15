@@ -67,6 +67,7 @@ Information about the commits
 
 How to view difference in files
 = git diff
+https://stackoverflow.com/questions/10950412/what-does-1-1-mean-in-gits-diff-output
 
 Difference is 
 Staging index - Working directory
@@ -80,7 +81,7 @@ Staging index - Working directory
 
 --- file name is the repository
 +++ file name is the one in working directory
-
+- means "old", as we usually invoke it as diff -u old new
 
 @@ -1,4 +1,2 @@
 that is to say to which lines the diff is referred 
@@ -207,4 +208,21 @@ git push -u origin master
 Adding SSH Key to a machine
 - https://help.github.com/articles/connecting-to-github-with-ssh/
 - This should work fine
+
+SHA1 is made up of what?
+https://gist.github.com/masak/2415865
+
+SHA1 value appears to be - d6cd1e2bd19e03a81132a23b2025920577f84e37
+
+How is computed - 
+= The source tree of the commit (which unravels to all the subtrees and blobs)
+= The parent commit sha1
+= The author info
+= The committer info (right, those are different!)
+= The commit message
+
+
+
+
+
 
