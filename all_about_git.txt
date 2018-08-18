@@ -1,6 +1,10 @@
 Installation
 = sudo apt-get install git
 
+Difference between GIT & SVN
+= https://softwareengineering.stackexchange.com/questions/315252/why-does-everyone-use-git-in-a-centralized-manner
+
+
 Version Number
 = git --version
 = which git
