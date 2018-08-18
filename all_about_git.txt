@@ -203,13 +203,12 @@ GitHub
 = git remote rm origin
 = git push -u origin master
 = git pull origin master
-
 = git clone www.......git (address should end with .git)
 
 pushing an existing repository from the command line
-
 git remote add origin www. ..... .git
 git push -u origin master
+= https://serverfault.com/questions/255346/what-does-master-mean-in-git-push-origin-master
 
 Adding SSH Key to a machine
 - https://help.github.com/articles/connecting-to-github-with-ssh/
@@ -226,3 +225,7 @@ How is computed -
 = The author info
 = The committer info (right, those are different!)
 = The commit message
+
+Some Links -
+= https://askubuntu.com/questions/527551/how-to-access-a-git-repository-using-ssh
+= https://stackoverflow.com/questions/1338728/delete-commits-from-a-branch-in-git
