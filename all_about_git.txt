@@ -4,6 +4,8 @@ Installation
 Difference between GIT & SVN
 = https://softwareengineering.stackexchange.com/questions/315252/why-does-everyone-use-git-in-a-centralized-manner
 
+Difference between Git and GitHub
+= https://stackoverflow.com/questions/13321556/difference-between-git-and-github
 
 Version Number
 = git --version
@@ -224,9 +226,3 @@ How is computed -
 = The author info
 = The committer info (right, those are different!)
 = The commit message
-
-
-
-
-
-
