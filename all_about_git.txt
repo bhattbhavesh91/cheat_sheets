@@ -141,6 +141,10 @@ git reset
 To remove untracked file or unwanted file
 = git clean -f
 
+To revert back a commit to a previous commit
+= git revert --no-commit 0766c053..HEAD
+= git commit
+
 To ignore some files while committing or putting in staging directory
 = touch .gitignore
 https://github.com/github/gitignore/blob/master/Python.gitignore
@@ -209,6 +213,15 @@ pushing an existing repository from the command line
 git remote add origin www. ..... .git
 git push -u origin master
 = https://serverfault.com/questions/255346/what-does-master-mean-in-git-push-origin-master
+
+pushing all branches to remote
+= git push --all origin
+
+Cloning and checking out a different branch and pushing the same branch
+= git clone https://github.com/bhattbhavesh91/cheat_sheets.git
+= cd cheat_sheets/
+= git checkout -b development origin/development
+= git push origin development:development
 
 Adding SSH Key to a machine
 - https://help.github.com/articles/connecting-to-github-with-ssh/
